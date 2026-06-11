@@ -1,0 +1,6 @@
+requests
+websocket-client
+pytest
+pymoo
+matplotlib
+pandas
