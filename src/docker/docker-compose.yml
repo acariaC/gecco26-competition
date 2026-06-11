@@ -1,0 +1,21 @@
+services:
+  simulator:
+    image: gitlab.informatik.uni-bremen.de:5005/evoal/vehicle-routing-problem/gecco26-competition/simulator:0.9.10
+    platform: linux/amd64
+    ports:
+      - 8088:8088
+    restart: unless-stopped
+    environment:
+      # amd64 emulation on Apple Silicon needs a much larger heap than native.
+      JAVA_TOOL_OPTIONS: "-Xmx4g -Xms1g"
+    mem_limit: 6g
+    volumes:
+      # attach a directory relative to the directory containing this compose file
+      - ${SCENARIO}:/data
+
+  web-ui:
+    image: gitlab.informatik.uni-bremen.de:5005/evoal/vehicle-routing-problem/gecco26-competition/web-ui:0.9.10
+    platform: linux/amd64
+    ports:
+      - 8080:80
+    restart: unless-stopped
